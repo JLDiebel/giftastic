@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Giftastic</title>
+</head>
+
+<body>
+    <button data-instrument="guitar">guitar</button>
+    <button data-instrument="drums">drums</button>
+    <button data-instrument="piano">piano</button>
+    <button data-instrument="bass">bass</button>
+    <div id="gifs-appear-here">
+    </div>
+    <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript">
+    $("button").on("click", function() {
+        var instrument = $(this).data("instrument");
+        var queryURL = "http://api.giphy.com/v1/gifs/search?q=" +
+            instrument + "&api_key=dc6zaTOxFJmzC&limit=10";
+
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).done(function(response) {
+
+
+
+            for (var i = 0; i < 11; i++) {
+                var instrumDiv = $("<div>");
+                var instrumImage = $("<img>");
+                var p = $("<p>").text("Rating: " + response.data[i].rating);
+                instrumImage.attr("src", response.data[i].images.fixed_height.url);
+                instrumImage.attr("data-still", response.data[i].images.fixed_height_still.url);
+                instrumImage.attr("data-animate", response.data[i].images.fixed_height.url);
+                instrumImage.attr("data-state", "animate");
+                instrumDiv.append(p);
+                instrumDiv.append(instrumImage);
+
+                $("#gifs-appear-here").append(instrumDiv); 
+
+
+                $("#gifs-appear-here").on("click", function() {
+
+                    var state = $(this).attr("data-state");
+
+                    if (state === "animate") {
+                        $(this).attr("src", $(this).data("still"));
+                        $(this).attr("data-state", "still");
+                    } else {
+
+                        $(this).attr("src", $(this).data("animate"));
+                        $(this).attr("data-state", "animate");
+                    }
+                      
+                });
+
+            };
+        });
+    });
+    </script>
+</body>
+
+</html>

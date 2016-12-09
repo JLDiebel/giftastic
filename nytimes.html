@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>New York Times Search</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+    <body>
+        <div class="container">
+            <header>
+                <div class="row" id="header">
+                    <div class="col-12">
+                        <h1 id="header_text"><!-- New York Times Search --></h1>
+                    </div>
+                </div>
+            </header>
+            <main>
+                <div class="row" id="search">
+                    <div class="col-12">
+                        <div class="sub_header">
+                            <h2 id="search_title_text"><!-- Search Parameters --></h2>
+                        </div>
+                        <div>
+                            <form>
+                                <span id="search_term_text"><!-- Search Term: --></span><br />
+                                <input type="text" name="search_term_input"><br />
+                                <span id="search_record_num_text"><!-- Number of Records to Retrive: --><br />
+                                <select id="search_record_num"></select>
+                                    <option class="search_record_nums"></option> <!-- <option value="##">##</option> -->
+                                </select>
+                                <span id="search_start_year_text"><!-- Start Year (Optional): --></span><br />
+                                <input type="text" name="search_start_year"><br />
+                                <span id="search_end_year_text"><!-- End Year (Optional) --></span>
+                                <input type="text" name="search_end_year"><br />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="top_articles">
+                    <div class="col-12">
+                        <div class="sub_header">
+                            <h2 id="top_articles_text"><!-- Top Articles --></h2>
+                        </div>
+                        <div class="article"></div>
+                    </div>
+                </div>
+            </main>
+            <footer>
+                <div class="row" id="footer">
+                    <div class="col-12" id="footer">
+                        <!-- footer text -->
+                    </div>
+                </div>
+            </footer>
+        </div>
+    <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript">
+        // A $( document ).ready() block.
+        $(document).ready(function() {
+            var nyt_article_search_url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+            nyt_article_search_url += '?' + $.param({
+                'api-key': ""
+            });
+            $.get(nyt_article_search_url, function(nyt_article_search) {
+                //nyt object from get function
+            });
+
+            var nyt_top_stories_url = "https://api.nytimes.com/svc/topstories/v2/home.json";
+            nyt_top_stories_url += '?' + $.param({
+                'api-key': ""
+            });
+            $.get(nyt_top_stories_url, function(nyt_top_stories) {
+                //nyt object from get function
+            });
+            
+        });
+    </script>
+    </body>
+</html>
